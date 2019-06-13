@@ -13,7 +13,7 @@ git push
 # ssh root@39.96.71.193
 # s2265681@163.com
 #  密钥登录
-ssh root@39.96.71.193 "cd /home/rock/www/server/blog-server-koa2;sudo git pull;pm2 restart koa2_server"
+ssh root@39.96.71.193 "cd /home/rock/www/server/blog-server-koa2;sudo git pull;"
 # git@gitee.com:rock_shang/blog-server-express.git
 # ssh -i flamingo-test-nx.pem ubuntu@ec2-52-82-39-98.cn-northwest-1.compute.amazonaws.com.cn "cd test/dev;sudo git pull"
 # 退出

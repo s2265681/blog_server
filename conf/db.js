@@ -5,10 +5,24 @@ console.log(env,'envvvvv')
 let MYSQL_CONF 
 let REDIS_CONF
 if(env==='development'){
+    // MYSQL_CONF = {
+    //     host:'localhost',
+    //     user:'root',
+    //     password:'shang5036',
+    //     port:'3306',
+    //     database:'myblog'
+    // }
+    //  MYSQL_CONF = {
+    //     host:'39.96.71.193',
+    //     user:'root',  
+    //     password:'shang5036',
+    //     port:'3306',
+    //     database:'myblog'
+    // }
     MYSQL_CONF = {
-        host:'localhost',
-        user:'root',
-        password:'shang5036',
+        host:'rm-bp1s7r0rn18f4nin4go.mysql.rds.aliyuncs.com',
+        user:'root',  
+        password:'s2265681@',
         port:'3306',
         database:'myblog'
     }
@@ -19,14 +33,28 @@ if(env==='development'){
 }
 
 if(env === 'production'){
+    // MYSQL_CONF = {
+    //     host:'localhost',
+    //     user:'root',  
+    //     password:'shang5036',
+    //     port:'3306',
+    //     database:'myblog'
+    // }
+    // MYSQL_CONF = {
+    //     host:'rm-bp1s7r0rn18f4nin4go.mysql.rds.aliyuncs.com',
+    //     user:'root',  
+    //     password:'s2265681@',
+    //     port:'3306',
+    //     database:'myblog'
+    // }
     MYSQL_CONF = {
-        host:'localhost',
+        host:'rm-bp1s7r0rn18f4nin4go.mysql.rds.aliyuncs.com',
         user:'root',  
-        password:'shang5036',
+        password:'s2265681@',
         port:'3306',
         database:'myblog'
     }
-
+    
     REDIS_CONF = {
         port:6379,
         host:'127.0.0.1'
