@@ -1,4 +1,10 @@
 const router = require("koa-router")();
+// const formidable = require('formidable')
+const path = require('path')
+
+
+
+const fs = require('fs')
 const {
   getList,
   getDetail,
@@ -58,5 +64,74 @@ router.post("/del", loginCheck, async (ctx, next) => {
 // router.get("/bar", async (ctx, next) => {
 //   ctx.body = "this is a users/bar response";
 // });
+
+ // 上传文件接口
+ router.post('/uploadfile', async (ctx, next) => {
+  // 上传单个文件
+  const file = ctx.request.files.file; // 获取上传文件
+  // 创建可读流
+  const reader = fs.createReadStream(file.path);
+  let filePath = path.join(__dirname, '../upload') + `/${file.name}`;
+  // 创建可写流
+  const upStream = fs.createWriteStream(filePath);
+  // 可读流通过管道写入可写流
+  reader.pipe(upStream);
+  // file
+  console.log(process.env.INIT_CWD,'process.env.INIT_CWD')
+  // const baseUrl =  process.env.INIT_CWD
+  
+
+  return ctx.body = {
+       filename:  file.name
+  }
+  //   filename: file.filename//返回文件名
+  // }
+  // if (data) {
+  //   ctx.body = new SuccessModel(data)
+  //   return;
+  // }
+  // ctx.body = {
+  //   filename: ctx.req.file.filename//返回文件名
+  // }
+
+});
+
+//  router.post('/upload', async ctx => {
+//    console.log(ctx,'ctx+++')
+
+//   const form = new formidable.IncomingForm()
+//   // 设置存储文件的目录
+//   const imgPath = path.join(__dirname, '/img')
+//   // 如果目录不存在则创建
+//   if (!fs.existsSync(imgPath)) fs.mkdirSync(imgPath)
+//   form.uploadDir = imgPath
+//   // 上传文件大小限制
+//   form.maxFieldsSize = 20 * 1024 * 1024
+
+//   let result = await new Promise(r => {
+//       form.parse(ctx.req, function (err, fields, files) {
+//           if (err) {
+//               r({ err })
+//           } else {
+//             // console.log(fields,'fields')
+//             // console.log(files,'files')
+//             // console.log(files.file,'files.file')
+//             // console.log(files.upload,'files.upload')
+//             // console.log(files.file.name,'files.file.name')
+//             // console.log(files.File.name,'File.name:')
+
+//               // 手动给文件加后缀, formidable默认保存的文件是无后缀的
+              
+//               let newPath = files.file.path + '_' + files.file.name
+//               // fs.renameSync(files.file.File.path, newPath)
+//               r({ path: newPath })
+//           }
+//       })
+//   })
+
+//   // console.log(result,'results')
+
+
+// })
 
 module.exports = router;
