@@ -34,7 +34,7 @@ onerror(app);
 app.use(koaBody({
   multipart: true,
   formidable: {
-      maxFileSize: 52428800
+      maxFileSize: 524288000000
   }
 }));
 
