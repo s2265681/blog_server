@@ -1,7 +1,7 @@
 const router = require("koa-router")();
-// const formidable = require('formidable')
 const path = require('path')
 
+// const koaBody = require('koa-body');
 
 
 const fs = require('fs')
@@ -42,12 +42,12 @@ router.post("/new", loginCheck, async (ctx, next) => {
 // update
 router.post("/update", loginCheck, async (ctx, next) => {
   const body = ctx.request.body
-  const data =  await getDetail(ctx.query.id,body);
+  const data =  await updateBlog(ctx.query.id,body);
     if (data) {
       ctx.body = new SuccessModel(data)
       return;
     }
-    ctx.body = new ErrorModel("新增博客失败")
+    ctx.body = new ErrorModel("修改博客失败")
 });
 // del
 router.post("/del", loginCheck, async (ctx, next) => {
@@ -61,10 +61,6 @@ router.post("/del", loginCheck, async (ctx, next) => {
   ctx.body = new ErrorModel("删除博客失败")
 });
 
-// router.get("/bar", async (ctx, next) => {
-//   ctx.body = "this is a users/bar response";
-// });
-
  // 上传文件接口
  router.post('/uploadfile', async (ctx, next) => {
   // 上传单个文件
@@ -76,22 +72,13 @@ router.post("/del", loginCheck, async (ctx, next) => {
   const upStream = fs.createWriteStream(filePath);
   // 可读流通过管道写入可写流
   reader.pipe(upStream);
-  // file
-  // console.log(process.env.INIT_CWD,'process.env.INIT_CWD')
   const baseUrl =  'https://www.rockshang.cn/'+file.name
+  // await next();
   return ctx.body = {
        filename:  baseUrl
   }
-  //   filename: file.filename//返回文件名
-  // }
-  // if (data) {
-  //   ctx.body = new SuccessModel(data)
-  //   return;
-  // }
-  // ctx.body = {
-  //   filename: ctx.req.file.filename//返回文件名
-  // }
-
+  // next()
+  // await next();
 });
 
 //  router.post('/upload', async ctx => {

@@ -6,6 +6,7 @@ const onerror = require("koa-onerror");
 const bodyparser = require("koa-bodyparser");
 const logger = require("koa-logger");
 
+const koaBody = require('koa-body');
 
 const session = require('koa-generic-session');
 const redisStore = require('koa-redis');
@@ -18,8 +19,18 @@ const users = require("./routes/users");
 const blog = require("./routes/blog");
 const user = require("./routes/user");
 
+
 // error handler
 onerror(app);
+
+// 设置上传文件大小最大限制，默认2M
+app.use(koaBody({
+  multipart: true,
+  formidable: {
+      maxFileSize: 200*1024*1024    
+  }
+}));
+
 
 // middlewares
 app.use(
@@ -27,16 +38,6 @@ app.use(
     enableTypes: ["json", "form", "text"]
   })
 );
-
-// 设置上传文件大小最大限制，默认2M
-const koaBody = require('koa-body');
-app.use(koaBody({
-    multipart: true,
-    formidable: {
-        maxFileSize: 200*1024*1024    
-    }
-}));
-
 
 app.use(json());
 app.use(logger());
@@ -48,6 +49,7 @@ app.use(
   })
 );
 
+
 // logger
 // 获取当前请求时间
 app.use(async (ctx, next) => {
@@ -58,9 +60,9 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
-
 // 处理session和lredis 登录验证
 app.keys = ['Shang#3890_']
+
 app.use(session({
   // 配置
   cookie:{
@@ -74,6 +76,8 @@ app.use(session({
     all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
   })
 }))
+
+
 
 
 // routes
