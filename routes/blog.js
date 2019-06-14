@@ -77,12 +77,10 @@ router.post("/del", loginCheck, async (ctx, next) => {
   // 可读流通过管道写入可写流
   reader.pipe(upStream);
   // file
-  console.log(process.env.INIT_CWD,'process.env.INIT_CWD')
-  // const baseUrl =  process.env.INIT_CWD
-  
-
+  // console.log(process.env.INIT_CWD,'process.env.INIT_CWD')
+  const baseUrl =  'https://www.rockshang.cn/'+file.name
   return ctx.body = {
-       filename:  file.name
+       filename:  baseUrl
   }
   //   filename: file.filename//返回文件名
   // }
