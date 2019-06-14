@@ -1,9 +1,9 @@
 // const env = process.env.NODE_ENV   // 环境参数
 const env = process.env.NODE_ENV || 'production';
 var os = require("os");
-console.log(env,'envvvvv')
-console.log(this,'window')
-console.log(os.hostname(),'os.hostname()')
+// console.log(env,'envvvvv')
+// console.log(this,'window')
+// console.log(os.hostname(),'os.hostname()')
 // console.log(process.env.INIT_CWD,'INIT_CWD')
 // 配置
 let MYSQL_CONF 
