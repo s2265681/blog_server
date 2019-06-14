@@ -27,7 +27,6 @@ const newBlog = async (blogData = {}) => {
   const content = xss(blogData.content);
   const author = blogData.author;
   const image = blogData.image;
-  console.log(blogData,'blogData')
   const createtime = Date.now();
   const sql = `
          insert into blog (title,content,createtime,author,image)
@@ -46,8 +45,10 @@ const updateBlog = async (id, blogData = {}) => {
   const title = xss(blogData.title);
   const content = xss(blogData.content);
   const author = blogData.author;
+  const image = blogData.image;
 
-  const sql = `update blog set title = '${title}',content = '${content}',author = '${author}'  where id ='${id}' `;
+  const sql = `update blog set title = '${title}',content = '${content}',author = '${author}',image ='${image}'  where id ='${id}' `;
+  console.log(sql,'sql')
   const  result = await exec(sql)
   if (result.affectedRows > 0) {
     return  true;
