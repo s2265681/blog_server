@@ -24,10 +24,17 @@ const user = require("./routes/user");
 onerror(app);
 
 // 设置上传文件大小最大限制，默认5M
+// app.use(koaBody({
+//   multipart: true,
+//   formidable: {
+//       maxFileSize: 500*1024*1024    
+//   }
+// }));
+
 app.use(koaBody({
   multipart: true,
   formidable: {
-      maxFileSize: 500*1024*1024    
+      maxFileSize: 52428800
   }
 }));
 
