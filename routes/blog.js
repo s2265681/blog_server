@@ -72,7 +72,7 @@ router.post("/del", loginCheck, async (ctx, next) => {
   const upStream = fs.createWriteStream(filePath);
   // 可读流通过管道写入可写流
   reader.pipe(upStream);
-  const baseUrl =  'https://www.rockshang.cn/'+file.name
+  const baseUrl =  'https://blog.rockshang.cn/'+file.name
   // await next();
   return ctx.body = {
        filename:  baseUrl
