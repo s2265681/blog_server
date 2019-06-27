@@ -1,4 +1,6 @@
 const Koa = require("koa");
+var cors = require('koa2-cors');
+
 const app = new Koa();
 const views = require("koa-views");
 const json = require("koa-json");
@@ -30,6 +32,10 @@ onerror(app);
 //       maxFileSize: 500*1024*1024    
 //   }
 // }));
+
+// 解决跨域
+app.use(cors());
+
 
 app.use(koaBody({
   multipart: true,
@@ -97,5 +103,10 @@ app.use(user.routes(), user.allowedMethods());
 app.on("error", (err, ctx) => {
   // console.error("server error", err, ctx);
 });
+
+
+
+
+
 
 module.exports = app;

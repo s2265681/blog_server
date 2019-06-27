@@ -1,0 +1,1 @@
+# npm install --save koa2-cors 解决跨域
