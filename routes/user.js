@@ -7,6 +7,7 @@ router.prefix("/api/user");
 /* POST login */
 router.post("/login", async (ctx, next) => {
   const { username, password } = ctx.request.body; 
+  console.log('username',username)
   const data = await login(username, password);
   if (data.username) {
     ctx.session.username = data.username;
